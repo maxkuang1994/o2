@@ -1,0 +1,97 @@
+body {
+	position: relative;
+	padding-top: 50px;
+	font-size: 13px;
+}
+.container {
+	min-width: 700px;
+}
+.navbar {
+	background-color: #563d7c !important;
+}
+.navbar-brand {
+	color: #fff !important;
+}
+.navbar-inverse  .navbar-nav > li > a {
+	color: #cdbfe3;
+}
+.navbar-inverse  .navbar-nav > .active > a, .navbar-inverse  .navbar-nav > .active > a:hover {
+	color: #fff;
+	background-color: #463265;
+}
+.status .active {
+	color: #000;
+	font-weight: bold;
+}
+.actions {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+select.form-control.bulk-actions {
+	width: 105px;
+	font-size: 12px;
+	padding: 3px;
+	height: 26px;
+	display: inline-block;
+}
+.btn.btn-mini {
+	padding: 3px 10px;
+	font-size: 12px;
+}
+.column-check {
+	width: 1px;
+}
+.column-author {
+	width: 25%;
+}
+.column-author img {
+	float: left;
+	margin-right: 10px;
+	margin-top: 1px;
+}
+.column-page {
+	width: 8%;
+}
+.column-comment .submitted-on {
+	color: #777;
+}
+.column-comment p {
+margin: .6em 0;
+}
+.table thead>tr>th {
+	vertical-align: top;
+}
+.row-actions .approve a, .row-actions .not-spam a {
+	color: #006505;
+}
+.row-actions .unapprove a {
+	color: #d98500;
+}
+.row-actions .delete a, .row-actions .spam a{
+	color: #bc0b0b;
+}
+.row-actions {
+	visibility: hidden;
+}
+#comments tr:hover > td .row-actions {
+	visibility: visible;
+}
+.table {
+	border: 1px solid #ddd;
+}
+.pagination {
+	margin: 0px;
+}
+.pagination>.disabled>span {
+	cursor: default;
+}
+.form-control {
+	height: 33px;
+	padding: 5px 10px;
+}
+select.form-control {
+	padding: 5px 6px;
+}
+.modal-footer {
+	margin-top: 0;
+}

@@ -1,0 +1,14 @@
+1.2 (05/08/2013)
+	- added linkify for links (added assets/js/jquery-linkify.min.js, modified assets/js/comments.js)
+	- fixed reply notification (includes/ajax.php)
+	- added responsive width for container&textarea (assets/css/comments.css,comments2.css, includes/template.php,template2.php)
+	- removed box_width setting from config.php (also in documentation)
+	
+1.1 (04/08/2013)
+	- added simple login/signup option (account.php)
+	- added comments + users.sql tables
+	- changed functions in includes/functions.php to work with the new login
+	- added db_users settings in config.php for users table
+	- fixed bug in admin/comments.php
+
+1.0 (04/08/2013)

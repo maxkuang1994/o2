@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Ajax Comment System Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<link href="assets/prism/prism.css" rel="stylesheet">
+	<script type="text/javascript" src="assets/prism/prism.js"></script>
+	<style type="text/css" media="screen">p, table, hr, .box { margin-bottom:25px; } .box p { margin-bottom:10px; } button {font-size: 12px; border: 0px; cursor: pointer; background: #3D93FF; color: #FFF; } .hidden { display: none; } </style>
+	<script type="text/javascript"> function show(id) {var elem = document.getElementById(id); elem.className = (elem.className == 'hidden') ? '' : 'hidden'; } </script>
+</head>
+<body>
+	<div class="container">
+		<h3 class="center alt">&ldquo;Ajax Comment System&rdquo; Documentation by &ldquo;Cretu Eusebiu&rdquo; v1.0</h3>
+		<hr>
+		<h1 class="center">&ldquo;Ajax Comment System&rdquo;</h1>
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 02/08/2013<br>
+					By: HazzardWeb<br>
+					Email: <a href="mailto:hazzardweb@gmail.com">hazzardweb@gmail.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing this script. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/HazzardWeb">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#installation">Installation & Configuration</a></li>
+			<li><a href="#admin">Admin Dashboard</a></li>
+			<li><a href="#config">Config Options</a></li>
+			<li><a href="#emails">Emails</a></li>
+			<li><a href="#users">Users Integration</a></li>
+			<li><a href="#adminEmbed">Admin Embed</a></li>
+			<li><a href="#structure">Structure</a></li>
+			<li><a href="#templates ">Templates </a></li>
+			<li><a href="#cssFiles">CSS Files</a></li>
+			<li><a href="#jsFiles">JS Files</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>
+		</ol>
+		<hr>
+		
+		<h3 id="installation"><strong>A) Installation & Configuration</strong> <a href="#toc">top</a></h3>
+		<p>To install this script you'll need a webhosting and a database, or you can install on your localhost server. Copy the script files where you want, then open <strong>config.php</strong> file with your text editor. <br> Here you have to set the <strong>$database</strong> array that contains login details for your database. Add a password, user and name. <br> You can also edit other settings here but you can also edit this settings from the Admin Dashboard. <br>
+		Next import into your database the <strong>comments.sql</strong> file. <br>
+	<iframe width="640" height="360" src="//www.youtube.com/embed/SG9G808Pu4E" frameborder="0" allowfullscreen></iframe>
+		<br>
+		To show the comments on your page you have to inlcude the following php code:
+<pre> <code class="language-php">//Include Comments Class
+require_once('includes/Comments.class.php');
+$Comments = new Comments();
+//Set some custom config
+$config = array(
+	'page_title' => 'My Page', //This is your page title, it's optional
+);
+$Comments->set_config($config);
+//Display comments
+$Comments->display_comments();</code></pre>
+You can also set the page of the comments by adding <em>'comment_page' => your_page_id</em>. For example your pages are like this: <em>http://yourwebsite.com/?page=1</em>. If you want to set the page of the comment to <em>page=1</em> your <strong>$config</strong> will be like this:
+<pre> <code class="language-php">$config = array(
+	'page_title' => 'My Page',
+	'comment_page'       => $_GET['page']
+);</code></pre>
+If <em>'comment_page'</em> is not set the url of the current page will be used.
+
+		</p>
+		<hr>
+	
+		<h3 id="admin"><strong>B) Admin Dashboard</strong> <a href="#toc">top</a></h3>
+		<p>To access the Admin go to the admin folder eg: <em>http://demo.hazzardweb.net/comments/admin</em>. The default username is <strong>admin</strong> and password <strong>admin</strong>. Make sure you change them. <br> Once logged as admin you can see all comments or edit the comments settings. <br>
+		First time when you click on the Settings menu you'll have to click on the <strong>Install</strong> button and the settings will be inserted into your comments database. Then make sure set the <strong>Base URL</strong> field and other settings you want. <br> If you want to embed this admin dashboard into your website admin see <a href="#adminEmbed">Admin Embed</a> section.</p>
+		<hr>
+
+		<h3 id="config"><strong>C) Config Options</strong> <a href="#toc">top</a></h3>
+		<p>To edit config options edit <strong>config.php</strong> or edit from Admin Dashboard. NOTE: if you install the Admin dashboard settings then the settings will be loaded from database. However some settings can be edit only from config.php file. <button onclick="show('cont1');">Click here</button> to see all config options.</p>
+<div id="cont1" class="hidden">
+<pre> <code class="language-php">/* Database connection details */
+$database = array(
+	'user' => '',
+	'pass' => '',
+	'name' => '',
+	'host' => 'localhost'
+);
+
+//General settings
+$config['base_url']          = 'http://yourwebsite.com/'; // The base url of your website
+$config['logged_only']       = FALSE;  // Only logged users can post comments
+$config['comment_status']    = 1;      // Default comment status: 1 - approved, 0 - pending, 2 - spam
+$config['maxlength']         = 500;    // Maximum characters allowed for comments
+$config['comments_per_page'] = 10;     // Comments per page
+$config['comment_reply']     = TRUE;   // Enable threaded (nested) comments
+$config['max_depth']         = 5;      // Levels deep
+$config['comments_order']    = 'DESC'; // Comments order
+
+//Captcha settings
+$config['comments_captcha']        = FALSE; // Enable captcha for not logged users
+$config['comments_captcha_logged'] = FALSE; // Enable captcha for logged users
+
+//Comment moderation
+$config['comments_limit']  = 3; // Maximum comments that can be posted per minute
+$config['mark_comment_as'] = 2;   // 0 - pending, 2 - spam , 3 - rejected
+$config['moderation_keys'] = '';
+$config['blacklist_keys']  = '';
+
+//Default avatar
+$config['default_avatar'] = 'monsterid'; // mystery, gravatar_default, identicon, wavatar, monsterid, retro or image source
+
+//E-mail notifications
+$config['comment_notification'] = '';    // Send emails here when comments are posted
+$config['reply_notification']   = FALSE; // Send emails to comment author when someone replies
+
+//Sender details
+$config['from_email'] = '';  // From email
+$config['from_name']  = '';  // From name
+//Use your Gmail account to send emails
+$config['gmail_username'] = '';
+$config['gmail_password'] = '';
+
+//Admin login
+$config['admin_user'] = 'admin';
+$config['admin_pass'] = 'admin';
+
+//Users table name and fields
+$config['db_users'] = array(
+	'table'  => '',
+	'id'     => '',
+	'name'   => '',
+	'email'  => '',
+	'url'    => '', //If false custom url functions will be used
+	'avatar' => false //If is false, gravatar or custom avatar will be used
+);
+
+//Options table name
+$config['db_options_table'] = 'options';
+
+//Other settings that you probably never use..
+//$config['jquery']            = false;           // Disable jQuery
+//$config['bootstrap']         = false;           // Disable bootstrap assets
+//$config['full_date_format']  = '';              // Date format for date() function
+//$config['short_date_format'] = '';              // Date format (short) for date() function
+//$config['comments_template'] = 'template2.php'; // Comments template file
+//$config['ajaxurl']           = 'includes/ajax.php';  // Url to the ajax file
+
+//Email templates
+$config['email_templates'] = array(
+	'body' => 'Author: %1$s (IP: %2$s) <br>
+			   E-mail: <a href="mailto:%3$s">%3$s</a> <br>
+			   URL: <a href="%4$s">%4$s</a> <br>
+			   Comment: %5$s <br><br>',
+	'new_comment' => array(
+		'subject' => '[HazzardWeb] New comment on "%1$s"',
+		'header'  => 'New comment on "%1$s"<br><br>',
+		'footer'  => 'You can see all comments on this page here: <br> <a href="%1$s">%1$s</a> <br>
+					  Permalink: <a href="%2$s">%2$s</a> <br>',
+	),
+	'moderate' => array(
+		'subject' => '[HazzardWeb] Please moderate: "%1$s"',
+		'header'  => 'A new comment on "%1$s" is waiting for your approval<br><br>',
+		'footer'  => 'Approve it <a href="%1$s">%1$s</a><br>
+					 Spam it <a href="%2$s">%2$s</a><br>
+					 Edit it <a href="%3$s">%3$s</a>',
+	),
+	'reply' => array(
+		'subject' => '[HazzardWeb] New reply on your comment on "%1$s"',
+		'body'    => '%1$s has replied to your comment: <br> %2$s <br><br> View comment <a href="%3$s">%3$s</a>'
+	)
+);
+
+/*
+//Javascript language vars
+$config['js_lang'] = array(
+	'url'        => 'Enter a valid website',
+	'author'     => 'Enter your name1',
+	'email'      => 'Enter a valid email address',
+	'captchar'   => 'Enter the verification code',
+	'captcham'   => 'The verification code is invalid',
+	'error'      => 'An unexpected error has occurred. Please try again.',
+	'comment'    => '1 comment',
+	'comments'   => ' comments',
+	'loading'    => 'Loading comments...',
+	'pending'    => 'Awaiting moderation',
+	'spam'       => 'Marked as spam',
+	'limit'      => 'You posted too many comments. Wait a minute.1',
+	'empty_com'  => 'Enter a comment.',
+	'nocomments' => 'no comments',
+	'logged'     => 'You must be logged to leave a comment !',
+);
+*/</code> </pre>
+</div>
+Also you can set a specific config option using <strong>set_config</strong> function.
+	<hr>
+		<h3 id="emails"><strong>D) Emails</strong> - <a href="#toc">top</a></h3>
+		<p>When someone has post a comment you can recive an email notification. Also when someone replies to someone's comment, that person can also recive a notification. <br>
+			To enable this feature go to Admin > Settings and check the <strong>E-mail notifications</strong> options. <br>
+			You also have to set the <strong>E-mail settings</strong>, sender name and email. <br>
+			Another feature is to use your Gmail account to send emails. Simply check the <em>Use my Gmail account</em> option and enter you Gmail email and password. </p>
+		<hr>
+		<h3 id="users"><strong>E) Users Integration</strong> - <a href="#toc">top</a></h3>
+		<p>As default to post a comment you'll have to enter your email and name. If you have a users login system on your website you can easily integrate with the comments. <br>
+		Open <strong>config.php</strong> and search for <em>$config['db_users']</em>.
+<pre><code class="language-php">//Users table name and fields
+$config['db_users'] = array(
+	'table'  => '',   // Where users is your table with users
+	'id'     => '',   // The ID field of your users table
+	'name'   => '',   // The NAME field from your users table
+	'email'  => '',   // EMAIL field
+	'url'    => '',   // URL field, if false custom url functions will be used
+	'avatar' => false // AVATAR field, if is false, gravatar or custom avatar will be used
+);</code></pre>
+The next setp is to set some functions in <strong>includes/functions.php</strong>. Here you have to edit this function <strong>com_is_logged()</strong> and <strong>com_get_user_id()</strong>. Basically here you have to check if your users are logged and return their user id. Examples:<br>
+
+<pre><code class="language-php">function com_is_logged()
+{
+	//Here you need to check if the user is logged into your website and then return TRUE or FALSE
+	if (isset($_SESSION['logged'])) //Or whatever session you have 
+		return true;
+	return false;
+}
+function com_get_user_id()
+{
+	//Here you need to set the user_id from your session
+	if (com_is_logged()) {
+		$user_id = $_SESSION['user_id']; //Or whatever session you have 
+		return $user_id;
+	}
+	else return false;
+}</code></pre>
+
+If you want a custom urls for the logged users uncomment <strong>com_get_user_url()</strong>. This functions has a $user_id param wich will tell you for what user you need the URL. For example your functions may look like this:
+<pre><code class="language-php">function com_get_user_url( $user_id )
+{
+	return 'http:/ /mywebsite.com/profiles/' . $user_id;
+	//This will return a custom url for your user. 
+}</code></pre>
+The same thing ca be done for the <strong>com_get_user_avatar()</strong> function.
+		 </p><hr>
+		
+		<h3 id="adminEmbed"><strong>F) Admin Embed</strong> - <a href="#toc">top</a></h3>
+		<p>If you have your own Admin dashboard you may want to integrate the comments into that. <br>
+			You'll need to copy admin/ folder into your website files then use the code from the pages you need. You'll have to edit few things in order to make it work how you want.
+			<button onclick="show('cont2');">Show Code</button>
+<div id="cont2"  class="hidden"><pre><code class="language-php">&lt;?php
+define('BASEPATH', TRUE);
+//Include Comments Class
+ require_once('path/to/comments/includes/Comments.class.php');
+$Comments = new Comments();
+require_once('path/to/admin/functions.php');
+//Logout action
+if (isset($_GET['logout'])) {
+	session_destroy();
+	header('Location: index.php');
+}
+//Set this for ajax.php
+$_SESSION['com_is_logged_admin'] = TRUE;
+//Get the current page from url
+$page = (!empty($_GET['page']))  ?  $_GET['page'] : '';
+?&gt;
+
+&lt;!--Some style and javascript--&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;path/to/admin/css/bootstrap.min.css&quot; media=&quot;all&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;path/to/admin/css/style.css&quot; media=&quot;all&quot;&gt;
+&lt;script src=&quot;path/to/admin/js/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/admin/js/jquery-ui-1.9.2.custom.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/admin/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/admin/js/script.js&quot;&gt;&lt;/script&gt;
+
+&lt;?php require_once('path/to/admin/comments.php'); ?&gt;
+or 
+&lt;?php require_once('path/to/admin/settings.php'); ?&gt;</code></pre></div>
+
+		 </p>
+	<hr>
+		<h3 id="structure"><strong>G) Structure</strong> - <a href="#toc">top</a></h3>
+		<p>The php files are located in the includes folder and the images, css and javascript in the assets folder. Also the admin file are separately in admin/ folder. <br>
+		
+		</p>
+
+		<h3 id="templates"><strong>H) Templates</strong> - <a href="#toc">top</a></h3>
+		<p>There are 2 templates to display the comments, both located in <em>includes/template.php</em> and <em>includes/template2.php</em>. The default one is template.php. You can set the other template from <strong>config.php</strong>, search for <em>$config['comments_template']</em>. You can edit a template or create your own. Just make sure you edit only how the comments are displayed. </p>
+		<hr>
+		<h3 id="cssFiles"><strong>I) CSS Files</strong> - <a href="#toc">top</a></h3>
+		<p>For the comments the css is located in <em>assets/css/</em>. bootstrap.min.css is for inputs, buttons and other elements, while comments.css and comments2.css are for displaying the comments. Each one is for a template. <br> If you want to disable bootstrap.min.css go to config.php search for $config['bootstrap'] and set it to FALSE; </p>
+		<hr>
+		<h3 id="jsFiles"><strong>J) JS Files</strong> - <a href="#toc">top</a></h3>
+		<p>In assets/js you'll find all the JavaScript files. comments.js is for all comments functions, mustache.min.js is the template engine.</p>
+		<h3 id="credits"><strong>K) Sources and Credits</strong> - <a href="#toc">top</a></h3>
+		<p>I've used the following assets and libraries:
+		<ul>
+			<li><a href="http://twitter.github.io/bootstrap/" target="_blank">Twitter Bootstrap</a></li>
+			<li><a href="http://jquery.com/" target="_blank">jQuery</a></li>
+			<li><a href="https://github.com/janl/mustache.js" target="_blank">Mustache</a></li>
+			<li><a href="https://github.com/Synchro/PHPMailer" target="_blank">PHPMailer</a></li>
+		</ul>
+		
+		<hr>
+		<p>Once again, thank you so much for purchasing this script. As I said at the beginning, I'd be glad to help you if you have any questions relating to this script.</p> 
+		<p class="append-bottom alt large"><strong>HazzardWeb</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>

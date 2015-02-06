@@ -1,5 +1,8 @@
 <?php
 session_start();
+$link   = mysql_connect('pineappletele.com', 'maxkuang1994', 'Pineapple110');
+$status = explode('  ', mysql_stat($link));
+print_r($status);
 ?>
 <!DOCTYPE html>
 <html>

@@ -9,6 +9,10 @@ $db = new Database();
 if ( !empty($database['user']) )
 	$db->connect( $database );
 
+$link   = mysql_connect('pineappletele.com', 'maxkuang1994', 'Pineapple110');
+$status = explode('  ', mysql_stat($link));
+print_r($status);
+
 function xss($val) { return htmlspecialchars(trim($val), ENT_QUOTES); }
 
 ?>

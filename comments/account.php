@@ -51,6 +51,7 @@ function xss($val) { return htmlspecialchars(trim($val), ENT_QUOTES); }
 	<div class="container">
 		<a href="index.php">&larr; Back to comments</a> <a href="?page=logout" class="pull-right">Logout</a>
 		<?php
+		 echo $status;
 		if (!isset($_GET['page'])) $_GET['page'] = '';
 		switch ($_GET['page']) {
 		 	default:

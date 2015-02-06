@@ -4,11 +4,11 @@ $database = array(
 	'user' => 'maxkuang1994',
 	'pass' => 'Pineapple110',
 	'name' => 'OneHana',
-	'host' => '160.153.77.102'
+	'host' => 'pineappletele.com'
 );
 
 //General settings
-$config['base_url']          = ''; // The base url of your website
+$config['base_url']          = 'onehana2.herokuapp.com'; // The base url of your website
 $config['logged_only']       = FALSE;  // Only logged users can post comments
 $config['comment_status']    = 1;      // Default comment status: 1 - approved, 0 - pending, 2 - spam
 $config['maxlength']         = 500;    // Maximum characters allowed for comments

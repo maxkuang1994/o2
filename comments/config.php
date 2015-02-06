@@ -4,7 +4,7 @@ $database = array(
 	'user' => 'maxkuang1994',
 	'pass' => 'Pineapple110',
 	'name' => 'OneHana',
-	'host' => 'localhost'
+	'host' => '160.153.77.102'
 );
 
 //General settings
